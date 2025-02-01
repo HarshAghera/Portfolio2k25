@@ -7,6 +7,56 @@ body {
   flex-direction: column; /* Ensure sections are stacked vertically */
 }
 
+/* Full-screen overlay with semi-transparent glass-like background */
+.loading-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2); /* Darker background for contrast */
+  backdrop-filter: blur(12px); /* Apply blur effect to the background */
+  -webkit-backdrop-filter: blur(12px); /* For Safari */
+  z-index: 9999; /* Keep above other content */
+  opacity: 1; /* Ensure spinner is visible initially */
+  transition: opacity 1s ease-out; /* Smooth fade-out transition */
+}
+
+/* Ripple effect style */
+.ripple {
+  border-radius: 50%;
+  width: 100px; /* Larger size */
+  height: 100px; /* Larger size */
+  background: radial-gradient(
+    circle,
+    rgba(0, 188, 212, 0.8),
+    /* Cyan Blue with opacity */ rgba(76, 175, 80, 0.8),
+    /* Fresh Green with opacity */ rgba(0, 128, 128, 0.8),
+    /* Teal Green with opacity */ rgba(41, 128, 185, 0.8)
+      /* Deep Sky Blue with opacity */
+  ); /* Soft gradient with opacity for a calm feeling */
+  animation: rippleEffect 2s infinite;
+}
+
+/* Keyframes for the ripple effect */
+@keyframes rippleEffect {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(2); /* More pronounced effect */
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
 /* Landing Section */
 .landing {
   background-color: #412e2e; /* Or a color that matches your image's tone */

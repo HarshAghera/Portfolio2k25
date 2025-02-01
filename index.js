@@ -4,6 +4,8 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 window.addEventListener('load', function () {
+  document.querySelector('.loading-spinner').style.display = 'none';
+
   document.querySelector('.landing').classList.add('loaded');
   document.querySelector('.content').style.visibility = 'visible';
 });
