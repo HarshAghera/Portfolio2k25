@@ -3,6 +3,11 @@ window.addEventListener('DOMContentLoaded', function () {
   document.querySelector('.content').style.opacity = '1';
 });
 
+window.addEventListener('load', function () {
+  document.querySelector('.landing').classList.add('loaded');
+  document.querySelector('.content').style.visibility = 'visible';
+});
+
 const jobTitles = [
   'Software Engineer',
   'Full Stack Developer',

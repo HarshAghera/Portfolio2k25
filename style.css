@@ -9,15 +9,21 @@ body {
 
 /* Landing Section */
 .landing {
-  background: url(landing.jpg) no-repeat center center;
+  background-color: #412e2e; /* Or a color that matches your image's tone */
+  background: url('landing.jpg') no-repeat center center;
   background-size: cover;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; /* For overlay */
-  overflow: hidden; /* Prevent native scroll */
-  transform: translateY(0); /* Reset custom scroll position */
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s ease; /* Fade effect */
+}
+
+.landing.loaded {
+  opacity: 1; /* Image is loaded */
 }
 
 .landing::after {
@@ -351,7 +357,7 @@ html {
 .projects {
   padding: 80px 20px;
   background: #2c3e50; /* Dark slate blue */
-  background-image: url(projectbg.jpg); /* Add texture image */
+  background: url(projectbg.jpg); /* Add texture image */
   background-size: cover;
   background-position: center;
   overflow: hidden; /* Prevent native scroll */
