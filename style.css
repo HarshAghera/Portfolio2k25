@@ -35,11 +35,12 @@ body {
   max-width: 500px;
   width: 100%;
   text-align: center;
-  visibility: hidden; /* Keep content hidden until it's ready */
-  background: rgba(26, 26, 26, 0.5); /* Semi-transparent background */
-  backdrop-filter: blur(4px); /* Apply the blur effect */
-  -webkit-backdrop-filter: blur(10px); /* For Safari */
-  z-index: 2; /* Ensure content is above the overlay */
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  background: rgba(26, 26, 26, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 2;
 }
 
 /* Heading Styles */

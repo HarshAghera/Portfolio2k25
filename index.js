@@ -1,6 +1,6 @@
 /* Show content when page is fully loaded */
-window.addEventListener('load', function () {
-  document.querySelector('.content').style.visibility = 'visible';
+window.addEventListener('DOMContentLoaded', function () {
+  document.querySelector('.content').style.opacity = '1';
 });
 
 const jobTitles = [
