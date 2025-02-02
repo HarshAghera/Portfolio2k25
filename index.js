@@ -1,15 +1,14 @@
-/* Show content when page is fully loaded */
 window.addEventListener('DOMContentLoaded', function () {
   document.querySelector('.content').style.opacity = '1';
 });
 
 window.addEventListener('load', function () {
   document.querySelector('.loading-spinner').style.display = 'none';
-
   document.querySelector('.landing').classList.add('loaded');
   document.querySelector('.content').style.visibility = 'visible';
 });
 
+// Typing Animation for Job Titles
 const jobTitles = [
   'Software Engineer',
   'Full Stack Developer',
@@ -19,13 +18,13 @@ const jobTitles = [
 
 let currentIndex = 0;
 let isTyping = true;
+let cursorBlinkInterval;
 
 function changeJobTitle() {
   const jobTitleElement = document.getElementById('job-title');
   const currentTitle = jobTitles[currentIndex];
 
   if (isTyping) {
-    // Typing animation
     if (jobTitleElement.textContent.length < currentTitle.length) {
       jobTitleElement.textContent += currentTitle.charAt(
         jobTitleElement.textContent.length,
@@ -35,7 +34,6 @@ function changeJobTitle() {
       clearInterval(cursorBlinkInterval);
     }
   } else {
-    // Removing animation
     if (jobTitleElement.textContent.length > 0) {
       jobTitleElement.textContent = jobTitleElement.textContent.slice(0, -1);
     } else {
@@ -46,61 +44,53 @@ function changeJobTitle() {
   }
 }
 
-// Start the typing effect
-setInterval(changeJobTitle, 100); // Adjust interval as needed
+setInterval(changeJobTitle, 100);
 
-// Close the navbar dropdown when a link is clicked (without jQuery)
+// Close navbar dropdown on link click
 document.addEventListener('DOMContentLoaded', function () {
-  // Get all navigation links
   const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
 
-  // Loop through each link and add a click event
   navLinks.forEach(function (link) {
     link.addEventListener('click', function () {
-      // Get the collapsed navbar element
       const navbarCollapse = document.getElementById('navbarNav');
 
-      // Check if the navbar collapse is already opened
       if (navbarCollapse.classList.contains('show')) {
-        // If it's open, manually collapse it
         const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-          toggle: false, // Do not toggle, just hide
+          toggle: false,
         });
-        bsCollapse.hide(); // Close the navbar
+        bsCollapse.hide();
       }
     });
   });
 });
 
+// About Section Animation
 document.addEventListener('DOMContentLoaded', () => {
   const description = document.querySelector('.p-description');
   const spans = description.querySelectorAll('span');
 
-  // Observer to detect when the "about" section is visible
   const aboutObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Apply staggered animations by adding the `animate` class
           spans.forEach((span, index) => {
             setTimeout(() => {
               span.classList.add('animate');
-            }, index * 350); // 350ms delay per line
+            }, index * 350);
           });
 
-          // Stop observing once animation is triggered
           aboutObserver.disconnect();
         }
       });
     },
-    { threshold: 0.5 }, // Trigger when 50% of the section is visible
+    { threshold: 0.5 },
   );
 
-  // Observe the "about" section
   const aboutSection = document.querySelector('#about');
   if (aboutSection) aboutObserver.observe(aboutSection);
 });
 
+// Scrolling Logic for Sections
 const sections = document.querySelectorAll('.section');
 let currentSection = 0;
 
@@ -116,37 +106,31 @@ document.addEventListener('wheel', (event) => {
       sections[currentSection].clientHeight >=
       sections[currentSection].scrollHeight
   ) {
-    // Scroll down to next section
     currentSection = Math.min(currentSection + 1, sections.length - 1);
     scrollToSection(currentSection);
     event.preventDefault();
   } else if (event.deltaY < 0 && sections[currentSection].scrollTop === 0) {
-    // Scroll up to previous section
     currentSection = Math.max(currentSection - 1, 0);
     scrollToSection(currentSection);
     event.preventDefault();
   }
 });
 
-// Get the floating home button element
+// Floating Home Button
 const homeButton = document.querySelector('.floating-home-button');
-
-// Get the landing section element
 const landingSection = document.getElementById('landing');
 
 document.addEventListener('DOMContentLoaded', () => {
-  const sections = document.querySelectorAll('.section'); // Select all sections
-  const navbarLinks = document.querySelectorAll('.navbar a'); // Select all navbar links
-  const scrollableSections = document.querySelectorAll('.scrollable'); // Select sections where scrolling is allowed
+  const sections = document.querySelectorAll('.section');
+  const navbarLinks = document.querySelectorAll('.navbar a');
+  const scrollableSections = document.querySelectorAll('.scrollable');
 
-  // Check if the screen width is greater than 768px (tablet and laptop)
   const isTabletOrLaptop = window.matchMedia('(min-width: 769px)').matches;
 
   if (isTabletOrLaptop) {
-    // Function to scroll to the target section
     function scrollToSection(event) {
-      event.preventDefault(); // Prevent default link behavior
-      const targetId = this.getAttribute('href').substring(1); // Get the target section ID
+      event.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
       const targetSection = document.getElementById(targetId);
 
       if (targetSection) {
@@ -156,12 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Attach click event to all navbar links
     navbarLinks.forEach((link) => {
       link.addEventListener('click', scrollToSection);
     });
 
-    // Enable scrolling for scrollable sections
     scrollableSections.forEach((section) => {
       section.addEventListener('wheel', (event) => event.stopPropagation(), {
         passive: false,
@@ -176,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     });
 
-    // Disable default scrolling globally
     window.addEventListener(
       'wheel',
       (event) => {
@@ -208,4 +189,37 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Scrolling is enabled on mobile devices.');
   }
 });
+
+// Force scroll to top on page load
 window.scrollTo(0, 0);
+
+// Enable scrolling for `.projects` section **only when it fully covers the viewport on mobile**
+document.addEventListener('DOMContentLoaded', function () {
+  const projectsSection = document.querySelector('.projects');
+
+  const enableScrollingForProjects = () => {
+    const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+    if (isSmallScreen) {
+      // Enable scroll only when the `.projects` section fully covers the viewport
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              projectsSection.classList.add('scrollable');
+            } else {
+              projectsSection.classList.remove('scrollable');
+            }
+          });
+        },
+        { root: null, threshold: 1.0 },
+      );
+      observer.observe(projectsSection);
+    } else {
+      // Allow scroll by default on larger screens
+      projectsSection.classList.add('scrollable');
+    }
+  };
+
+  enableScrollingForProjects();
+  window.addEventListener('resize', enableScrollingForProjects); // Reapply logic on resize
+});

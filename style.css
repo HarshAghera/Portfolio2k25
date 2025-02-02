@@ -68,7 +68,7 @@ body {
 /* Landing Section */
 .landing {
   background-color: #412e2e; /* Or a color that matches your image's tone */
-  background: url('landing.jpg') no-repeat center center;
+  background: url(assets/landing.webp) no-repeat center center;
   background-size: cover;
   height: 100vh;
   display: flex;
@@ -161,7 +161,7 @@ body {
 
 .about {
   padding: 80px 20px;
-  background: url('aboutbg.jpg');
+  background: url('assets/aboutbg.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -216,7 +216,7 @@ body {
 /* Skills Section */
 .skills {
   padding: 80px 20px;
-  background: url(skillsbg.jpg);
+  background: url(assets/skillsbg.webp);
   background-size: cover;
   background-position: center;
   color: #000000; /* Dark text for contrast */
@@ -415,13 +415,19 @@ html {
 .projects {
   padding: 80px 20px;
   background: #2c3e50; /* Dark slate blue */
-  background: url(projectbg.jpg); /* Add texture image */
+  background: url(assets/projectbg.webp); /* Add texture image */
   background-size: cover;
   background-position: center;
   overflow: hidden; /* Prevent native scroll */
   transform: translateY(0); /* Reset custom scroll position */
   color: #000000;
   position: relative;
+}
+
+.projects.scrollable {
+  overflow-y: auto; /* Enable scrolling when fully visible */
+  max-height: 100vh;
+  scrollbar-width: thin;
 }
 
 .projects h1 {
