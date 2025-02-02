@@ -1,3 +1,4 @@
+// Show content when page is fully loaded
 window.addEventListener('DOMContentLoaded', function () {
   document.querySelector('.content').style.opacity = '1';
 });
@@ -120,6 +121,7 @@ document.addEventListener('wheel', (event) => {
 const homeButton = document.querySelector('.floating-home-button');
 const landingSection = document.getElementById('landing');
 
+// Handle page load
 document.addEventListener('DOMContentLoaded', () => {
   const sections = document.querySelectorAll('.section');
   const navbarLinks = document.querySelectorAll('.navbar a');
@@ -200,7 +202,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const enableScrollingForProjects = () => {
     const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
     if (isSmallScreen) {
-      // Enable scroll only when the `.projects` section fully covers the viewport
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -215,7 +216,6 @@ document.addEventListener('DOMContentLoaded', function () {
       );
       observer.observe(projectsSection);
     } else {
-      // Allow scroll by default on larger screens
       projectsSection.classList.add('scrollable');
     }
   };
@@ -223,3 +223,15 @@ document.addEventListener('DOMContentLoaded', function () {
   enableScrollingForProjects();
   window.addEventListener('resize', enableScrollingForProjects); // Reapply logic on resize
 });
+
+// Service Worker Registration for Caching Assets
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('/service-worker.js')
+    .then(function (registration) {
+      console.log('Service Worker registered with scope:', registration.scope);
+    })
+    .catch(function (error) {
+      console.log('Service Worker registration failed:', error);
+    });
+}
