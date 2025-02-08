@@ -324,6 +324,7 @@ body {
 /* Navbar Toggler and Links */
 .navbar-toggler-icon {
   color: #f0efef;
+  filter: invert(1);
 }
 
 .navbar a {
