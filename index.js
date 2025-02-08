@@ -12,8 +12,8 @@ window.addEventListener('load', function () {
 // Typing Animation for Job Titles
 const jobTitles = [
   'Software Engineer',
-  'Full Stack Developer',
   'Backend Developer',
+  'Full Stack Developer',
   'Enthusiastic',
 ];
 
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Force scroll to top on page load
 window.scrollTo(0, 0);
 
-// Enable scrolling for `.projects` section **only when it fully covers the viewport on mobile**
+// Enable scrolling for `.projects` section
 document.addEventListener('DOMContentLoaded', function () {
   const projectsSection = document.querySelector('.projects');
 
